@@ -6,6 +6,7 @@ import { connect, Dispatch } from 'react-redux';
 import { getExecutableSessionActions, SessionState } from '@src/shared/state/session';
 // tslint:disable-next-line:max-line-length
 import { getExecutableBackgroundContainerActions, BackgroundContainerState } from '@src/shared/state//background_container';
+import { Action } from 'redux';
 
 
 // These props will be subtracted from original component type
@@ -30,7 +31,8 @@ export const connectWithRedux = <P extends WrappedComponentProps>(
 	// 	count: number;
 	// }
 
-	const mapDispatchToProps = (dispatch: Dispatch<object>) => {
+	// tslint:disable-next-line:no-any
+	const mapDispatchToProps = (dispatch: Dispatch<Action<any>>) => {
 		return action_types.reduce((
 			prev: object,
 			current_action: DispatchActionTypes

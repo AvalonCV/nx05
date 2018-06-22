@@ -33,12 +33,12 @@ function* rootSaga(): SagaIterator {
 }
 
 const rootReducer = combineReducers({
-	session: SessionReducer,
-	background_container: BackgroundContainerReducer
+	background_container: BackgroundContainerReducer,
+	session: SessionReducer
 });
 
 const sagaMiddleware = createSagaMiddleware();
-let store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSaga);
 
 import App from './App';

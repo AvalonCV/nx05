@@ -11,7 +11,7 @@ export interface LoginViewProps {
 
 export class LoginView extends React.PureComponent<LoginViewProps, LoginViewState> {
 
-	render(): JSX.Element {
+	public render(): JSX.Element {
 		return (
 			<div className="">
 

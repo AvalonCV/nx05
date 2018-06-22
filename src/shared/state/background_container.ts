@@ -1,16 +1,15 @@
 import { Dispatch } from 'react-redux';
-import { createAction, getType } from 'typesafe-actions';
+import { createAction, getType, ActionType } from 'typesafe-actions';
 import { SagaIterator } from 'redux-saga';
 import { put, takeEvery } from 'redux-saga/effects';
-import { $call } from 'utility-types';
 
 
 
 export const background_container_actions = {
-	show_video: createAction('BACKGROUND_SHOW_VIDEO'),
-	show_video_success: createAction('SESSION_LOGIN_SUCCESS'),
-	show_video_fail: createAction('SESSION_LOGIN_FAILURE'),
 	hide_video: createAction('BACKGROUND_HIDE_VIDEO'),
+	show_video: createAction('BACKGROUND_SHOW_VIDEO'),
+	show_video_fail: createAction('SESSION_LOGIN_FAILURE'),
+	show_video_success: createAction('SESSION_LOGIN_SUCCESS')
 };
 
 
@@ -18,9 +17,8 @@ export interface BackgroundContainerState {
 	is_video_visible: boolean;
 	is_video_loading: boolean;
 }
-const returnsOfActions = Object.values(background_container_actions).map($call);
-export type BackgroundContainerAction = typeof returnsOfActions[number];
 
+export type BackgroundContainerAction = ActionType<typeof background_container_actions>;
 
 export interface ExecutableBackgroundContainerActions {
 	showBackgroundVideo: () => void;
@@ -30,11 +28,11 @@ export interface ExecutableBackgroundContainerActions {
 // tslint:disable-next-line:max-line-length
 export const getExecutableBackgroundContainerActions = (dispatch: Dispatch<BackgroundContainerAction>): ExecutableBackgroundContainerActions => {
 	return {
-		showBackgroundVideo: (): void => {
-			dispatch({ type: getType(background_container_actions.show_video) });
-		},
 		hideBackgroundVideo: (): void => {
 			dispatch({ type: getType(background_container_actions.hide_video) });
+		},
+		showBackgroundVideo: (): void => {
+			dispatch({ type: getType(background_container_actions.show_video) });
 		}
 	};
 };
@@ -59,8 +57,8 @@ export const BackgroundContainerReducer = (state: BackgroundContainerState | und
 		return new_state;
 	} else {
 		return {
-			is_video_visible: false,
 			is_video_loading: true,
+			is_video_visible: false
 		};
 	}
 };

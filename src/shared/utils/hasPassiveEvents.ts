@@ -4,11 +4,11 @@
 	--- Maybe use as polyfill to change all window.addEventListeners?
 */
 function browserSupportsPassiveEvents(): boolean {
-	var supported = false;
+	let supported = false;
 
 	try {
-		var options = Object.defineProperty({}, 'passive', {
-			get: function () {
+		const options = Object.defineProperty({}, 'passive', {
+			get: () => {
 				supported = true;
 			}
 		});

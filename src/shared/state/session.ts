@@ -1,26 +1,26 @@
 import { Dispatch } from 'react-redux';
-import { createAction, getType } from 'typesafe-actions';
+import { createAction, getType, ActionType } from 'typesafe-actions';
 import { SagaIterator } from 'redux-saga';
 import { put, takeEvery } from 'redux-saga/effects';
-import { $call } from 'utility-types';
 
 
 export const session_actions = {
-	login: createAction('SESSION_LOGIN', (login: string, username: string) => ({
-		type: 'SESSION_LOGIN',
-		login,
-		username
-	})),
-	login_success: createAction('SESSION_LOGIN_SUCCESS'),
+	login: createAction('SESSION_LOGIN', resolve => {
+		return (
+			login: string,
+			username: string
+		) => resolve({login, username});
+	}),
 	login_fail: createAction('SESSION_LOGIN_FAILURE'),
+	login_success: createAction('SESSION_LOGIN_SUCCESS'),
 
 	logout: createAction('SESSION_LOGOUT'),
-	logout_success: createAction('SESSION_LOGOUT_SUCCESS'),
 	logout_fail: createAction('SESSION_LOGOUT_FAILURE'),
+	logout_success: createAction('SESSION_LOGOUT_SUCCESS'),
 
-	timeout: createAction('SESSION_TIMEOUT'),
 	refresh: createAction('SESSION_REFRESH'),
-	request_pending: createAction('SESSION_REQUEST_PENDING')
+	request_pending: createAction('SESSION_REQUEST_PENDING'),
+	timeout: createAction('SESSION_TIMEOUT')
 };
 
 export interface SessionState {
@@ -30,9 +30,7 @@ export interface SessionState {
 	is_request_pending: boolean;
 }
 
-
-const returnsOfActions = Object.values(session_actions).map($call);
-export type SessionAction = typeof returnsOfActions[number];
+type SessionAction = ActionType<typeof session_actions>;
 
 export interface ExecutableSessionActions {
 	executeLogin: (login: string, username: string) => void;
@@ -44,9 +42,11 @@ export const getExecutableSessionActions = (dispatch: Dispatch<SessionAction>): 
 	return {
 		executeLogin: (login: string, username: string): void => {
 			dispatch({
-				type: getType(session_actions.login),
-				login,
-				username
+				payload: {
+					login,
+					username
+				},
+				type: getType(session_actions.login)
 			});
 		},
 		executeLogout: (): void => {
@@ -68,10 +68,10 @@ export const SessionReducer = (state: SessionState | undefined, action: SessionA
 
 			case getType(session_actions.logout_success):
 				new_state = {
-					is_valid: true,
-					is_user_identified: true,
+					is_request_pending: false,
 					is_user_authenticathed: false,
-					is_request_pending: false
+					is_user_identified: true,
+					is_valid: true
 				};
 				break;
 
@@ -80,10 +80,10 @@ export const SessionReducer = (state: SessionState | undefined, action: SessionA
 		return new_state;
 	} else {
 		return {
-			is_valid: true,
-			is_user_identified: false,
+			is_request_pending: false,
 			is_user_authenticathed: false,
-			is_request_pending: false
+			is_user_identified: false,
+			is_valid: true
 		};
 	}
 };

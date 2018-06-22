@@ -7,10 +7,10 @@ const background_video_styles = {
 		position: 'fixed',
 		height: '100%',
 		width: '100%',
-		overflow: 'hidden',
-		zIndex: '-100',
 		opacity: '0',
+		overflow: 'hidden',
 		transition: 'opacity 300ms',
+		zIndex: '-100',
 		'> video': {
 			position: 'absolute',
 			top: '50%',

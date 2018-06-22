@@ -10,7 +10,7 @@ import { ExecutableSessionActions } from '@src/shared/state/session';
 
 import { VirtualList } from '@src/client/Components/VirtualList/VirtualList';
 
-const logo = require('@src/shared/images/Puma_Cat.svg');
+import logo from '@src/shared/images/Puma_Cat.svg';
 
 export interface LoginState {
 }
@@ -40,13 +40,13 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 		}
 	}
 
-	render(): JSX.Element {
+	public render(): JSX.Element {
 
 		const VList = VirtualList<ListItemProperties>({
 			items: this.items,
 			contain_list_children: false,
 			className: 'xxx',
-			mapItemToProperties: (item: ListItemProperties) => {return {i: item.i}; }
+			mapItemToProperties: (item: ListItemProperties) => ({i: item.i})
 		})(MyListItems);
 
 		return (

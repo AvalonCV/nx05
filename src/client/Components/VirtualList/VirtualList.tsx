@@ -76,13 +76,13 @@ export const VirtualList = <T extends object>(options: VirtualListOptions<T>) =>
 			this.onScroll = throttleByRequestAnimationFrame(this.onScroll, this);
 		}
 
-		setListContainerElement(element: Reference): void {
+		public setListContainerElement(element: Reference): void {
 			if (element) {
 				this._list_container_element_ref = element;
 			}
 		}
 
-		updateStateIfRequired(): void {
+		public updateStateIfRequired(): void {
 			// TODO: try to make the following code more elegant!
 			if (this._list_container_element_ref) {
 
@@ -92,7 +92,7 @@ export const VirtualList = <T extends object>(options: VirtualListOptions<T>) =>
 				let current_offset_top: null | number = null;
 				let calculation_done: boolean = false;
 
-				const getDistanceToDocumentTop = function (element: HTMLElement): number {
+				const getDistanceToDocumentTop = (element: HTMLElement): number => {
 					let retval = 0;
 					while (element) {
 						retval += (element.offsetTop - element.scrollTop + element.clientTop);
@@ -105,7 +105,7 @@ export const VirtualList = <T extends object>(options: VirtualListOptions<T>) =>
 					return retval;
 				};
 
-				let new_state: VirtualListState = Array.prototype.reduce.call(
+				const new_state: VirtualListState = Array.prototype.reduce.call(
 					this._list_container_element_ref.children,
 					(state: VirtualListState, element: HTMLElement, index: number) => {
 
@@ -143,14 +143,14 @@ export const VirtualList = <T extends object>(options: VirtualListOptions<T>) =>
 		}
 
 
-		onResize(): void {
+		protected onResize(): void {
 			if (this.state.item_height) {
 				this.updateStateIfRequired();
 			}
 		}
 
 
-		onScroll(): void {
+		protected onScroll(): void {
 			if (this.state.item_height) {
 				// tslint:disable-next-line:max-line-length
 				const number_of_new_rows = Math.floor(Math.max(0, window.scrollY - this.state.first_item_distance_to_document_top) / this.state.item_height);
@@ -170,7 +170,7 @@ export const VirtualList = <T extends object>(options: VirtualListOptions<T>) =>
 		}
 
 		// lifecycle methods
-		componentDidMount(): void {
+		public componentDidMount(): void {
 			// console.log('componentDidMount', this);
 
 			if (!this._is_component_fully_mounted) {
@@ -189,18 +189,18 @@ export const VirtualList = <T extends object>(options: VirtualListOptions<T>) =>
 			this._is_component_fully_mounted = true;
 		}
 
-		componentWillUnmount(): void {
+		public componentWillUnmount(): void {
 			// remove listener
 			// console.log('componentWillUnmount');
 			window.removeEventListener('scroll', this.onScroll);
 			window.removeEventListener('resize', this.onResize);
 		}
 
-		componentWillUpdate(): void {
+		public componentWillUpdate(): void {
 			// console.log('componentWillUpdate');
 		}
 
-		render(): JSX.Element | null {
+		public render(): JSX.Element | null {
 			const items = options.items.slice(this.state.first_item_index, this.state.last_item_index);
 			// console.log('rendör');
 			if (items.length === 0) {

@@ -47,6 +47,7 @@
 		"no-any": true,
 		"no-arg": true,
 		"no-bitwise": true,
+		"no-empty-interface": false,
 		"no-console": [
 			false,
 			"log",
@@ -69,6 +70,7 @@
 		"no-trailing-whitespace": false,
 		"no-unused-expression": true,
 		"no-use-before-declare": true,
+		"object-literal-sort-keys": false,
 		"one-line": [
 			true,
 			"check-catch",
@@ -76,6 +78,7 @@
 			"check-open-brace",
 			"check-whitespace"
 		],
+		"ordered-imports": false,
 		"quotemark": [
 			true,
 			"single",

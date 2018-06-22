@@ -38,29 +38,29 @@ interface ViewRouteElement {
 }
 
 const route_configuration: ViewRouteElement[] = [{
-		path: '/home',
-		exact: true,
-		sensitive: false,
 		component: Home,
-		needs_authentification: true
-	}, {
-		path: '/pwrequest',
 		exact: true,
-		sensitive: false,
+		needs_authentification: true,
+		path: '/home',
+		sensitive: false
+	}, {
 		component: PasswordRequest,
-		needs_authentification: false
+		exact: true,
+		needs_authentification: false,
+		path: '/pwrequest',
+		sensitive: false
 	}, {
+		component: Login,
+		exact: true,
+		needs_authentification: false,
 		path: '/login',
-		exact: true,
-		sensitive: false,
-		component: Login,
-		needs_authentification: false
+		sensitive: false
 	}, {
-		path: '/',
-		exact: true,
-		sensitive: false,
 		component: Login,
-		needs_authentification: false
+		exact: true,
+		needs_authentification: false,
+		path: '/',
+		sensitive: false
 	}
 ];
 
@@ -84,7 +84,7 @@ const RouteHandler = (props: ViewRouteElement): JSX.Element | null => {
 					path={path}
 					exact={exact}
 					sensitive={sensitive}
-					render={function(newprops: object) {
+					render={(newprops: object) => {
 						return (
 							<MainExternalLayout>
 								<Component />

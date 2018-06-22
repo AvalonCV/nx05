@@ -1,8 +1,9 @@
 import * as React from 'react';
 
 import ReactPlayer from 'react-player';
+// tslint:disable-next-line:no-var-requires
 const background_video = require('@src/shared/videos/Northernlights2_HD.out2.mp4');
-const background_video_poster = require('@src/shared/videos/Northernlights2_HD.out2.poster.jpg');
+import background_video_poster from '@src/shared/videos/Northernlights2_HD.out2.poster.jpg';
 
 import { connect, FelaWithStylesProps } from 'react-fela';
 import { BackgroundVideoStyles } from './BackgroundVideoStyles';
@@ -22,7 +23,7 @@ let test_counter = 0;
 
 class BackgroundVideoWrapper extends React.PureComponent<BackgroundVideoProperties, object> {
 
-	render() {
+	public render() {
 
 		// console.log('this.props', test_counter, this.props.is_video_visible, this.props.is_video_loading);
 		if (test_counter > 10) {

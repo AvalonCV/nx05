@@ -48,18 +48,18 @@ type AppProps = App & Props;
 
 class App extends React.PureComponent<AppProps, object> {
 
-	componentDidMount() {
+	public componentDidMount() {
 
 		let is_scroll_active = false;
 		const body_class = this.props.styles.body_no_pointer_events;
 		const removePointerEvents = debounce(
-			function() {
+			() => {
 				document.body.className = '';
 				is_scroll_active = false;
 			},
 			250
 		);
-		window.addEventListener('scroll', function() {
+		window.addEventListener('scroll', () => {
 			if (!is_scroll_active) {
 				is_scroll_active = true;
 				document.body.className = body_class;
@@ -69,7 +69,7 @@ class App extends React.PureComponent<AppProps, object> {
 	}
 
 
-	render(): JSX.Element {
+	public render(): JSX.Element {
 		return (
 			<div className={this.props.styles.app}>
 				<BackgroundVideoContainer />
