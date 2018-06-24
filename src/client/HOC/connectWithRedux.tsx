@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 
+
 // custom actions
 // tslint:disable-next-line:max-line-length
 import { getExecutableSessionActions, SessionState } from '@src/shared/state/session';
 // tslint:disable-next-line:max-line-length
-import { getExecutableBackgroundContainerActions, BackgroundContainerState } from '@src/shared/state//background_container';
+import { getExecutableBackgroundContainerActions, BackgroundContainerState } from '@src/shared/state/background_container';
 import { Action } from 'redux';
 
 
@@ -18,7 +19,7 @@ type DispatchActionTypes = 'session' | 'background_container' | undefined;
 type StateProps =  SessionState | BackgroundContainerState | object;
 
 // https://github.com/piotrwitek/react-redux-typescript-guide#higher-order-components
-export const connectWithRedux = <P extends WrappedComponentProps>(
+export const connectWithRedux = <P extends WrappedComponentProps> (
 	WrappedComponent: React.ComponentType<P>,
 	action_types: DispatchActionTypes[]
 ) => {

@@ -21,7 +21,6 @@ export const main_layout_styles = {
 		// backgroundColor: '#004e7e',
 		// color: 'white'
 	} as IStyle,
-
 	content_area: {
 		flexGrow: 1,
 		flexBasis: '0',

@@ -9,6 +9,7 @@ import { connect, FelaWithStylesProps } from 'react-fela';
 import { BackgroundVideoStyles } from './BackgroundVideoStyles';
 
 import { connectWithRedux } from '@src/client/HOC/connectWithRedux';
+
 // tslint:disable-next-line:max-line-length
 import { ExecutableBackgroundContainerActions, BackgroundContainerState } from '@src/shared/state/background_container';
 
@@ -50,8 +51,8 @@ class BackgroundVideoWrapper extends React.PureComponent<BackgroundVideoProperti
 						}
 					}
 				}}
-				width=""
-				height=""
+				width="auto"
+				height="auto"
 				playing={false} // default should be 'yes' -> but for now 'save' energy
 				muted={true}
 				loop={true}

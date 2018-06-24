@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect as connectWithFela, FelaWithStylesProps } from 'react-fela';
+import { withRouter } from 'react-router-dom';
 
 import { debounce } from 'lodash';
 
@@ -31,6 +32,7 @@ import { BackgroundVideoContainer } from '@src/client/Layout/BackgroundVideo';
 
 
 interface OwnProps {
+	location: object;
 }
 
 type Props = OwnProps & FelaWithStylesProps<OwnProps, Styles, {}>;
@@ -73,11 +75,12 @@ class App extends React.PureComponent<AppProps, object> {
 		return (
 			<div className={this.props.styles.app}>
 				<BackgroundVideoContainer />
-				<MainApplicationRoutes />
+				<MainApplicationRoutes location={this.props.location}  />
 			</div>
 		);
 	}
 }
 
 
-export default connectWithFela<OwnProps, object, object>(AppStyles)(App);
+// tslint:disable-next-line:no-any
+export default withRouter(connectWithFela<OwnProps, object, object>(AppStyles)(App) as any);

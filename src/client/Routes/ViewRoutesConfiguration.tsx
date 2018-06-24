@@ -84,7 +84,8 @@ const RouteHandler = (props: ViewRouteElement): JSX.Element | null => {
 					path={path}
 					exact={exact}
 					sensitive={sensitive}
-					render={(newprops: object) => {
+					// tslint:disable-next-line:only-arrow-functions
+					render={ function(newprops: object) {
 						return (
 							<MainExternalLayout>
 								<Component />
@@ -100,7 +101,18 @@ const RouteHandler = (props: ViewRouteElement): JSX.Element | null => {
 };
 
 
-export const ViewRoutes = (props: object): JSX.Element => {
+/* 	use the location element have an element that changes
+	every time a link is clicked -> external libraries (like redux)
+	implement a shallow compare algorithm to determine if connected
+	components should be re-drawn.
+	-> if nothing (but the URL) changes the components will not update
+	(https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/redux.md#blocked-updates)
+*/
+interface RouterStatus {
+	location: object;
+}
+
+export const ViewRoutes = (props: RouterStatus): JSX.Element => {
 	return (
 		<Switch>
 			{route_configuration.map((route_element, index) => {
