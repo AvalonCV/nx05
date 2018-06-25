@@ -74,6 +74,8 @@ class App extends React.PureComponent<AppProps, object> {
 	public render(): JSX.Element {
 		return (
 			<div className={this.props.styles.app}>
+				{/*<React.StrictMode>
+				</React.StrictMode>*/}
 				<BackgroundVideoContainer />
 				<MainApplicationRoutes location={this.props.location}  />
 			</div>

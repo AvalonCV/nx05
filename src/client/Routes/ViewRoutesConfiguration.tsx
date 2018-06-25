@@ -101,7 +101,7 @@ const RouteHandler = (props: ViewRouteElement): JSX.Element | null => {
 };
 
 
-/* 	use the location element have an element that changes
+/* 	use the location object have a property that changes
 	every time a link is clicked -> external libraries (like redux)
 	implement a shallow compare algorithm to determine if connected
 	components should be re-drawn.

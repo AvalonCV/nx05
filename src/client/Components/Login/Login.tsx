@@ -8,6 +8,8 @@ import { LoginStyles, login_styles } from './LoginStyles';
 import { connectWithRedux } from '@src/client/HOC/connectWithRedux';
 import { ExecutableSessionActions } from '@src/shared/state/session';
 
+import { Formik, FormikProps, Form, Field, FieldProps } from 'formik';
+
 import { VirtualList } from '@src/client/Components/VirtualList/VirtualList';
 
 import logo from '@src/shared/images/Puma_Cat.svg';
@@ -26,6 +28,12 @@ interface ListItemProperties {
 const MyListItems: React.StatelessComponent<ListItemProperties> = (props: ListItemProperties) => {
 	return <div style={{margin: '1em', border: '1px solid gray', padding: '1em'}}>Test [{props.i}]</div>;
 };
+
+interface LoginFormProps {
+	login: string;
+	password?: string;
+}
+
 
 class LoginForFela extends React.PureComponent<Properties, LoginState> {
 
@@ -49,6 +57,36 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 			mapItemToProperties: (item: ListItemProperties) => ({i: item.i})
 		})(MyListItems);
 
+		const LoginForm = (
+			<Formik initialValues={{login: '', password: ''}}
+					onSubmit={(values: LoginFormProps, formikBag: FormikProps<LoginFormProps>) => {
+						console.log('form state', JSON.stringify(values));
+						window.setTimeout(() => {
+							formikBag.setSubmitting(false);
+						// tslint:disable-next-line:align
+						}, 1000);
+					}}
+					render={(formikBag: FormikProps<LoginFormProps>) => (
+						// TODO: why doesn't the default form-submit (ENTER) work anymore?
+						<Form method="get">
+							<Field name="login" render={({field, form}: FieldProps<LoginFormProps>) => (
+								<div className="inner_field_wrapper">
+									<label htmlFor="login">E-Mail</label>
+									<input type="text" placeholder="Login with your email" id="login" required={true} {...field} />
+								</div>
+							)} />
+							<Field name="password" render={({field, form}: FieldProps<LoginFormProps>) => (
+								<div className="inner_field_wrapper">
+									<label htmlFor="password">Password</label>
+									<input type="password" placeholder="Something very secret" id="password" required={true} {...field} />
+								</div>
+							)} />
+							<button disabled={formikBag.isSubmitting} type="submit">Submit</button>
+						</Form>
+					)}
+			/>
+		);
+
 		return (
 			<div className={this.props.styles.container}>
 				<div className={this.props.styles.login_input}>
@@ -59,6 +97,7 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 						<li><Link to="/login">Login</Link></li>
 						<li><Link to="/pwrequest">Request</Link></li>
 					</ul>
+					{LoginForm}
 					<h3>TODO:</h3>
 					<ul>
 						<li><del>Virtualized List -> v1 done</del></li>

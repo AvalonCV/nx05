@@ -196,10 +196,6 @@ export const VirtualList = <T extends object>(options: VirtualListOptions<T>) =>
 			window.removeEventListener('resize', this.onResize);
 		}
 
-		public componentWillUpdate(): void {
-			// console.log('componentWillUpdate');
-		}
-
 		public render(): JSX.Element | null {
 			const items = options.items.slice(this.state.first_item_index, this.state.last_item_index);
 			// console.log('rendör');
