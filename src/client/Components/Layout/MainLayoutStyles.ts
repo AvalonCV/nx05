@@ -1,7 +1,6 @@
 import { IStyle } from 'fela';
 
 export const main_layout_styles = {
-
 	main_layout: {
 		display: 'flex',
 		flexDirection: 'column',
@@ -17,7 +16,7 @@ export const main_layout_styles = {
 		width: '100%',
 		maxWidth: '1024px',
 		marginLeft: 'auto',
-		marginRight: 'auto',
+		marginRight: 'auto'
 		// backgroundColor: '#004e7e',
 		// color: 'white'
 	} as IStyle,

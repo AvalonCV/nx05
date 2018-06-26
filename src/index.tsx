@@ -13,10 +13,8 @@ import { Provider as FelaProvider } from 'react-fela';
 // create fela renderer
 const renderer = createRenderer();
 
-
 // ---------------------- CLIENT SIDE ROUTING ----------------------
 import { HashRouter as Router } from 'react-router-dom';
-
 
 // ---------------------- APP STATE MANAGEMENT ----------------------
 import { createStore, applyMiddleware, combineReducers } from 'redux';
@@ -24,12 +22,8 @@ import { Provider as ReduxProvider } from 'react-redux';
 import createSagaMiddleware, { SagaIterator } from 'redux-saga';
 import { fork, all } from 'redux-saga/effects';
 
-
 function* rootSaga(): SagaIterator {
-	yield all([
-		fork(SessionSaga),
-		fork(BackgroundContainerSaga)
-	]);
+	yield all([fork(SessionSaga), fork(BackgroundContainerSaga)]);
 }
 
 const rootReducer = combineReducers({

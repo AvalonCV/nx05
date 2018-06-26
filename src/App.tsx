@@ -30,13 +30,11 @@ import { BackgroundVideoContainer } from '@src/client/Layout/BackgroundVideo';
 //   | AppAction
 //   | ReactRouterAction;
 
-
 interface OwnProps {
 	location: object;
 }
 
 type Props = OwnProps & FelaWithStylesProps<OwnProps, Styles, {}>;
-
 
 interface AppState {
 	is_session_valid: boolean;
@@ -47,11 +45,8 @@ interface App {
 
 type AppProps = App & Props;
 
-
 class App extends React.PureComponent<AppProps, object> {
-
 	public componentDidMount() {
-
 		let is_scroll_active = false;
 		const body_class = this.props.styles.body_no_pointer_events;
 		const removePointerEvents = debounce(
@@ -59,8 +54,7 @@ class App extends React.PureComponent<AppProps, object> {
 				document.body.className = '';
 				is_scroll_active = false;
 			},
-			250
-		);
+			250);
 		window.addEventListener('scroll', () => {
 			if (!is_scroll_active) {
 				is_scroll_active = true;
@@ -70,19 +64,17 @@ class App extends React.PureComponent<AppProps, object> {
 		});
 	}
 
-
 	public render(): JSX.Element {
 		return (
 			<div className={this.props.styles.app}>
 				{/*<React.StrictMode>
 				</React.StrictMode>*/}
 				<BackgroundVideoContainer />
-				<MainApplicationRoutes location={this.props.location}  />
+				<MainApplicationRoutes location={this.props.location} />
 			</div>
 		);
 	}
 }
-
 
 // tslint:disable-next-line:no-any
 export default withRouter(connectWithFela<OwnProps, object, object>(AppStyles)(App) as any);

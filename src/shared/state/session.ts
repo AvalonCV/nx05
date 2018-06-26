@@ -3,13 +3,9 @@ import { createAction, getType, ActionType } from 'typesafe-actions';
 import { SagaIterator } from 'redux-saga';
 import { put, takeEvery } from 'redux-saga/effects';
 
-
 export const session_actions = {
 	login: createAction('SESSION_LOGIN', resolve => {
-		return (
-			login: string,
-			username: string
-		) => resolve({login, username});
+		return (login: string, username: string) => resolve({ login, username });
 	}),
 	login_fail: createAction('SESSION_LOGIN_FAILURE'),
 	login_success: createAction('SESSION_LOGIN_SUCCESS'),
@@ -88,9 +84,7 @@ export const SessionReducer = (state: SessionState | undefined, action: SessionA
 	}
 };
 
-
 function* handleLogout(): SagaIterator {
-
 	yield put({ type: getType(session_actions.request_pending) });
 
 	// dispatch to

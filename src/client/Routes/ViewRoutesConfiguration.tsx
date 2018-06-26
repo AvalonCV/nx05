@@ -6,24 +6,32 @@ import { Login } from '@src/client/Components/Login/Login';
 import { MainAuthenticatedLayout, MainExternalLayout } from '@src/client/Components/Layout/MainLayout';
 
 // put them in a separate file
-const Home: React.StatelessComponent<{}> = (props) => {
+const Home: React.StatelessComponent<{}> = props => {
 	return (
 		<div className="background">
 			<h1>Home</h1>
 			<ul>
-				<li><Link to="/pwrequest">Request</Link></li>
-				<li><Link to="/">Login</Link></li>
+				<li>
+					<Link to="/pwrequest">Request</Link>
+				</li>
+				<li>
+					<Link to="/">Login</Link>
+				</li>
 			</ul>
 		</div>
 	);
 };
-const PasswordRequest: React.StatelessComponent<{}> = (props) => {
+const PasswordRequest: React.StatelessComponent<{}> = props => {
 	return (
 		<div className="background">
 			<h1>PW Request Page</h1>
 			<ul>
-				<li><Link to="/home">Home</Link></li>
-				<li><Link to="/">Login</Link></li>
+				<li>
+					<Link to="/home">Home</Link>
+				</li>
+				<li>
+					<Link to="/">Login</Link>
+				</li>
 			</ul>
 		</div>
 	);
@@ -37,25 +45,29 @@ interface ViewRouteElement {
 	needs_authentification: boolean;
 }
 
-const route_configuration: ViewRouteElement[] = [{
+const route_configuration: ViewRouteElement[] = [
+	{
 		component: Home,
 		exact: true,
 		needs_authentification: true,
 		path: '/home',
 		sensitive: false
-	}, {
+	},
+	{
 		component: PasswordRequest,
 		exact: true,
 		needs_authentification: false,
 		path: '/pwrequest',
 		sensitive: false
-	}, {
+	},
+	{
 		component: Login,
 		exact: true,
 		needs_authentification: false,
 		path: '/login',
 		sensitive: false
-	}, {
+	},
+	{
 		component: Login,
 		exact: true,
 		needs_authentification: false,
@@ -85,7 +97,7 @@ const RouteHandler = (props: ViewRouteElement): JSX.Element | null => {
 					exact={exact}
 					sensitive={sensitive}
 					// tslint:disable-next-line:only-arrow-functions
-					render={ function(newprops: object) {
+					render={function(newprops: object) {
 						return (
 							<MainExternalLayout>
 								<Component />
@@ -99,7 +111,6 @@ const RouteHandler = (props: ViewRouteElement): JSX.Element | null => {
 		return null;
 	}
 };
-
 
 /* 	use the location object have a property that changes
 	every time a link is clicked -> external libraries (like redux)
