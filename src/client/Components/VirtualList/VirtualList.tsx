@@ -144,14 +144,14 @@ export const VirtualList = <T extends object>(options: VirtualListOptions<T>) =>
 
 
 		protected onResize(): void {
-			if (this.state.item_height) {
+			if (this.state && this.state.item_height) {
 				this.updateStateIfRequired();
 			}
 		}
 
 
 		protected onScroll(): void {
-			if (this.state.item_height) {
+			if (this.state && this.state.item_height) {
 				// tslint:disable-next-line:max-line-length
 				const number_of_new_rows = Math.floor(Math.max(0, window.scrollY - this.state.first_item_distance_to_document_top) / this.state.item_height);
 				const last_row = this.state.max_visible_rows_in_viewport + number_of_new_rows;
@@ -183,25 +183,24 @@ export const VirtualList = <T extends object>(options: VirtualListOptions<T>) =>
 				//    would lead to one re-render anyways
 				window.requestAnimationFrame(this.updateStateIfRequired);
 			}
-			// add listener
+			// add listeners
 			window.addEventListener('scroll', this.onScroll, browser_has_passive_events ? { passive: true } : false);
 			window.addEventListener('resize', this.onResize, browser_has_passive_events ? { passive: true } : false);
 			this._is_component_fully_mounted = true;
 		}
 
 		public componentWillUnmount(): void {
-			// remove listener
-			// console.log('componentWillUnmount');
+			// remove listeners
 			window.removeEventListener('scroll', this.onScroll);
 			window.removeEventListener('resize', this.onResize);
 		}
 
 		public render(): JSX.Element | null {
-			const items = options.items.slice(this.state.first_item_index, this.state.last_item_index);
-			// console.log('rendör');
-			if (items.length === 0) {
+			const items = this.state ? options.items.slice(this.state.first_item_index, this.state.last_item_index) : [];
+			if (this.state === null || items.length === 0) {
 				return null;
 			} else {
+				const {first_item_index} = this.state;
 				return (
 					<ol
 						style={{
@@ -219,7 +218,7 @@ export const VirtualList = <T extends object>(options: VirtualListOptions<T>) =>
 							return (
 								<li
 									className={this.props.styles.list_item}
-									key={this.state.first_item_index + index}
+									key={first_item_index + index}
 								>
 									<ListItemComponent {...props}/>
 								</li>

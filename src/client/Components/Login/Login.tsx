@@ -63,11 +63,10 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 					}, 1000);
 				}}
 				render={(formikBag: FormikProps<LoginFormProps>) => (
-					// TODO: why doesn't the default form-submit (ENTER) work anymore?
 					<Form method="get">
 						<Field
 							name="login"
-							render={({ field, form }: FieldProps<LoginFormProps>) => (
+							render={({ field }: FieldProps<LoginFormProps>) => (
 								<div className="inner_field_wrapper">
 									<label htmlFor="login">E-Mail</label>
 									<input
@@ -82,7 +81,7 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 						/>
 						<Field
 							name="password"
-							render={({ field, form }: FieldProps<LoginFormProps>) => (
+							render={({ field }: FieldProps<LoginFormProps>) => (
 								<div className="inner_field_wrapper">
 									<label htmlFor="password">Password</label>
 									<input
