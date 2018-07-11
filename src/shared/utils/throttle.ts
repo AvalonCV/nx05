@@ -3,7 +3,7 @@
 
 */
 
-export const throttleByRequestAnimationFrame = (callback: () => void, that?: object): () => void => {
+export const throttleByRequestAnimationFrame = (callback: () => void, that?: object): (() => void) => {
 	let is_scheduled = false;
 	return () => {
 		if (is_scheduled) {

@@ -9,7 +9,7 @@ import { MainLayoutStyles, main_layout_styles } from './MainLayoutStyles';
 import { FelaStylesForUnconnectedProps } from '@src/shared/css/FelaStyles';
 
 interface LayoutProps {
-	children: JSX.Element;
+	children: JSX.Element | JSX.Element[];
 }
 interface HeaderProps {
 	styles: FelaStylesForUnconnectedProps<MainLayoutStyles>;

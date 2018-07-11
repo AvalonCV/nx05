@@ -2,21 +2,12 @@ import * as React from 'react';
 
 // import { Link } from 'react-router-dom';
 
-export interface LoginViewState {
-}
+export interface LoginViewState {}
 
-export interface LoginViewProps {
-}
-
+export interface LoginViewProps {}
 
 export class LoginView extends React.PureComponent<LoginViewProps, LoginViewState> {
-
 	public render(): JSX.Element {
-		return (
-			<div className="">
-
-				Login View
-			</div>
-		);
+		return <div className="">Login View</div>;
 	}
 }

@@ -3,7 +3,10 @@ import { Route, Link, Redirect, Switch } from 'react-router-dom';
 
 // import View-Components
 import { Login } from '@src/client/Components/Login/Login';
+
 import { MainAuthenticatedLayout, MainExternalLayout } from '@src/client/Components/Layout/MainLayout';
+import { TodoView } from '@src/client/Views/Todo';
+import { Helmet } from 'react-helmet';
 
 // put them in a separate file
 const Home: React.StatelessComponent<{}> = props => {
@@ -45,6 +48,11 @@ interface ViewRouteElement {
 	needs_authentification: boolean;
 }
 
+/*
+	Put these in /Views/* and register them
+	a) when loading the site and
+	b) any needs_authentification=true views if the login action has been successful
+*/
 const route_configuration: ViewRouteElement[] = [
 	{
 		component: Home,
@@ -65,6 +73,34 @@ const route_configuration: ViewRouteElement[] = [
 		exact: true,
 		needs_authentification: false,
 		path: '/login',
+		sensitive: false
+	},
+	{
+		component: Login,
+		exact: true,
+		needs_authentification: false,
+		path: '/register',
+		sensitive: false
+	},
+	{
+		component: TodoView,
+		exact: true,
+		needs_authentification: false,
+		path: '/todo',
+		sensitive: false
+	},
+	{
+		component: Login,
+		exact: true,
+		needs_authentification: false,
+		path: '/privacy',
+		sensitive: false
+	},
+	{
+		component: Login,
+		exact: true,
+		needs_authentification: false,
+		path: '/legal',
 		sensitive: false
 	},
 	{
@@ -100,6 +136,10 @@ const RouteHandler = (props: ViewRouteElement): JSX.Element | null => {
 					render={function(newprops: object) {
 						return (
 							<MainExternalLayout>
+								<Helmet>
+									<title>NX04</title>
+									<meta name="description" content="" />
+								</Helmet>
 								<Component />
 							</MainExternalLayout>
 						);

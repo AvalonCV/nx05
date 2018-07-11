@@ -117,6 +117,9 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 						<li>
 							<Link to="/pwrequest">Request</Link>
 						</li>
+						<li>
+							<Link to="/todo">TODO</Link>
+						</li>
 					</ul>
 					{LoginForm}
 					<h3>TODO:</h3>

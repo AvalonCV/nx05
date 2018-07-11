@@ -49,12 +49,11 @@ class App extends React.PureComponent<AppProps, object> {
 	public componentDidMount() {
 		let is_scroll_active = false;
 		const body_class = this.props.styles.body_no_pointer_events;
-		const removePointerEvents = debounce(
-			() => {
-				document.body.className = '';
-				is_scroll_active = false;
-			},
-			250);
+		const removePointerEvents = debounce(() => {
+			document.body.className = '';
+			is_scroll_active = false;
+			// tslint:disable-next-line:align
+		}, 250);
 		window.addEventListener('scroll', () => {
 			if (!is_scroll_active) {
 				is_scroll_active = true;
