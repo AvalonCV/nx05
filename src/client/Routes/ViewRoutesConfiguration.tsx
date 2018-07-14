@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Route, Link, Redirect, Switch } from 'react-router-dom';
-
-// import View-Components
-import { Login } from '@src/client/Components/Login/Login';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { Location } from 'history';
+import Helmet from 'react-helmet';
 
 import { MainAuthenticatedLayout, MainExternalLayout } from '@src/client/Components/Layout/MainLayout';
-import { TodoView } from '@src/client/Views/Todo';
-import { Helmet } from 'react-helmet';
+// import View-Components
+import { Login } from '@src/client/Components/Login/Login';
+import { TodoView } from '@src/client/Views/TodoView';
 
 // put them in a separate file
 const Home: React.StatelessComponent<{}> = props => {
@@ -118,14 +119,8 @@ const RouteHandler = (props: ViewRouteElement): JSX.Element | null => {
 	const { path, needs_authentification, component: Component, exact = true, sensitive = true } = props;
 
 	if (Component) {
-		if (is_session_authenticaed) {
-			return (
-				<MainAuthenticatedLayout>
-					<div>Logged In</div>
-				</MainAuthenticatedLayout>
-			);
-		} else if (needs_authentification) {
-			return <Redirect to="/" />;
+		if (!is_session_authenticaed && needs_authentification) {
+			return <Redirect to="/login" />;
 		} else {
 			return (
 				<Route
@@ -133,18 +128,23 @@ const RouteHandler = (props: ViewRouteElement): JSX.Element | null => {
 					exact={exact}
 					sensitive={sensitive}
 					// tslint:disable-next-line:only-arrow-functions
-					render={function(newprops: object) {
-						return (
-							<MainExternalLayout>
-								<Helmet>
-									<title>NX04</title>
-									<meta name="description" content="" />
-								</Helmet>
-								<Component />
-							</MainExternalLayout>
-						);
-					}}
-				/>
+					// render={function(newprops: object) {
+					// 	return (
+					// 		<React.Fragment>
+					// 			<Component />
+					// 		</React.Fragment>
+					// 	);
+					// }}
+					// component={Component}
+				>
+					<React.Fragment>
+						<Helmet>
+							<title>NX04</title>
+							<meta name="description" content="" />
+						</Helmet>
+						<Component />
+					</React.Fragment>
+				</Route>
 			);
 		}
 	} else {
@@ -152,7 +152,7 @@ const RouteHandler = (props: ViewRouteElement): JSX.Element | null => {
 	}
 };
 
-/* 	use the location object have a property that changes
+/* 	use the location object to have a property that changes
 	every time a link is clicked -> external libraries (like redux)
 	implement a shallow compare algorithm to determine if connected
 	components should be re-drawn.
@@ -160,15 +160,32 @@ const RouteHandler = (props: ViewRouteElement): JSX.Element | null => {
 	(https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/redux.md#blocked-updates)
 */
 interface RouterStatus {
-	location: object;
+	location: Location;
 }
 
 export const ViewRoutes = (props: RouterStatus): JSX.Element => {
+	const LayoutComponent = is_session_authenticaed ? MainAuthenticatedLayout : MainExternalLayout;
+
+	const routes = route_configuration.map((route_element, index) => {
+		return <RouteHandler key={index} {...route_element} />;
+	});
+
 	return (
-		<Switch>
-			{route_configuration.map((route_element, index) => {
-				return <RouteHandler key={index} {...route_element} />;
-			})};
-		</Switch>
+		<LayoutComponent>
+			<TransitionGroup component={null}>
+				<CSSTransition
+					key={props.location.pathname}
+					classNames="fade"
+					timeout={1000}
+					unmountOnExit={true}
+					addEndListener={(node, done) => {
+						// use the css transitionend event to mark the finish of a transition
+						node.addEventListener('transitionend', done, false);
+					}}
+				>
+					<Switch location={props.location}>{routes}</Switch>
+				</CSSTransition>
+			</TransitionGroup>
+		</LayoutComponent>
 	);
 };

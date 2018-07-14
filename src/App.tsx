@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { connect as connectWithFela, FelaWithStylesProps } from 'react-fela';
 import { withRouter } from 'react-router-dom';
-
+import { Location } from 'history';
 import { debounce } from 'lodash';
 
-import AppStyles, { Styles } from '@src/AppStyles';
+import { AppStyles, app_styles } from '@src/AppStyles';
 
 import { ViewRoutes as MainApplicationRoutes } from '@src/client/Routes/ViewRoutesConfiguration';
 import { BackgroundVideoContainer } from '@src/client/Layout/BackgroundVideo';
@@ -30,22 +30,16 @@ import { BackgroundVideoContainer } from '@src/client/Layout/BackgroundVideo';
 //   | AppAction
 //   | ReactRouterAction;
 
-interface OwnProps {
-	location: object;
+export interface AppProps {
+	location: Location;
 }
-
-type Props = OwnProps & FelaWithStylesProps<OwnProps, Styles, {}>;
-
-interface AppState {
+export interface AppState {
 	is_session_valid: boolean;
 }
-interface App {
-	state: AppState;
-}
 
-type AppProps = App & Props;
+type Properties = AppProps & FelaWithStylesProps<AppProps, AppStyles, {}>;
 
-class App extends React.PureComponent<AppProps, object> {
+class App extends React.PureComponent<Properties, AppState> {
 	public componentDidMount() {
 		let is_scroll_active = false;
 		const body_class = this.props.styles.body_no_pointer_events;
@@ -76,4 +70,4 @@ class App extends React.PureComponent<AppProps, object> {
 }
 
 // tslint:disable-next-line:no-any
-export default withRouter(connectWithFela<OwnProps, object, object>(AppStyles)(App) as any);
+export default withRouter(connectWithFela<AppProps, AppStyles>(app_styles as AppStyles)(App) as any);

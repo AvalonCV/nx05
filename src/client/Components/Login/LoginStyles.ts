@@ -2,10 +2,12 @@ import { IStyle } from 'fela';
 
 export const login_styles = {
 	container: {
+		width: '100%',
 		minHeight: '100%',
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
+		alignContent: 'center'
 	} as IStyle,
 
 	login_input: {
@@ -15,7 +17,7 @@ export const login_styles = {
 		boxShadow: '0 0 4px gray',
 		backgroundColor: 'white',
 		flexGrow: 0,
-		minHeight: '300px',
+		minHeight: '450px',
 		marginBottom: '150px',
 		padding: '2em',
 		borderRadius: '2px',

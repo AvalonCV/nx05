@@ -8,14 +8,13 @@ import { LoginStyles, login_styles } from './LoginStyles';
 import { connectWithRedux } from '@src/client/HOC/connectWithRedux';
 import { ExecutableSessionActions } from '@src/shared/state/session';
 
-import { Formik, FormikProps, Form, Field, FieldProps } from 'formik';
+import { Formik, FormikProps, Form, Field, FieldProps, FormikActions } from 'formik';
 
 import { VirtualList } from '@src/client/Components/VirtualList/VirtualList';
 
 import logo from '@src/shared/images/Puma_Cat.svg';
 
 export interface LoginState {}
-
 export interface LoginProps {}
 
 type Properties = LoginProps & ExecutableSessionActions & FelaWithStylesProps<LoginProps, LoginStyles, {}>;
@@ -52,10 +51,12 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 			mapItemToProperties: (item: ListItemProperties) => ({ i: item.i })
 		})(MyListItems);
 
+		//  (e: React.FormEvent<HTMLFormElement>) => void;
+
 		const LoginForm = (
 			<Formik
 				initialValues={{ login: '', password: '' }}
-				onSubmit={(values: LoginFormProps, formikBag: FormikProps<LoginFormProps>) => {
+				onSubmit={(values: LoginFormProps, formikBag: FormikActions<LoginFormProps>) => {
 					console.log('form state', JSON.stringify(values));
 					window.setTimeout(() => {
 						formikBag.setSubmitting(false);
@@ -70,8 +71,9 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 								<div className="inner_field_wrapper">
 									<label htmlFor="login">E-Mail</label>
 									<input
-										type="text"
+										type="email"
 										placeholder="Login with your email"
+										autoComplete="email"
 										id="login"
 										required={true}
 										{...field}
@@ -87,6 +89,7 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 									<input
 										type="password"
 										placeholder="Something very secret"
+										autoComplete="current-password"
 										id="password"
 										required={true}
 										{...field}
@@ -103,7 +106,7 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 		);
 
 		return (
-			<div className={this.props.styles.container}>
+			<div className={this.props.styles.container} data-test={1}>
 				<div className={this.props.styles.login_input}>
 					<h1>Welcome</h1>
 					<p>Please have a great day</p>
@@ -122,25 +125,6 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 						</li>
 					</ul>
 					{LoginForm}
-					<h3>TODO:</h3>
-					<ul>
-						<li>
-							<del>Virtualized List -> v1 done</del>
-						</li>
-						<li>Translations -> probably react-i18next</li>
-						<li>Page Transitions</li>
-						<li>Background Logic / API</li>
-						<li>Authentification</li>
-						<li>Forms &amp; Inputs</li>
-						<li>Design-Guide</li>
-						<li>View / Component Splitting</li>
-						<li>Pages / Title / Meta-Handling</li>
-						<li>Actual Features</li>
-						<li>understanding TypeScript -> probably never</li>
-						<li>A more serious test coverage</li>
-						<li>Performance</li>
-						<li>&hellip;</li>
-					</ul>
 
 					<VList />
 
@@ -151,6 +135,8 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 	}
 }
 
-export const Login = connectWithRedux(connect<LoginProps, LoginStyles>(login_styles as LoginStyles)(LoginForFela), [
-	'session'
-]);
+export const Login = connectWithRedux(
+	// tslint:disable-next-line:no-any
+	connect<LoginProps, LoginStyles>(login_styles as LoginStyles)(LoginForFela as any),
+	['session']
+);

@@ -1,45 +1,51 @@
 {
-  "name": "nx04",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@types/lodash": "^4.14.111",
-    "@types/react-helmet": "^5.0.6",
-    "fela": "^6.1.9",
-    "formik": "^0.11.11",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-fela": "^7.3.1",
-    "react-helmet": "^5.2.0",
-    "react-lazyload": "^2.3.0",
-    "react-player": "^1.6.4",
-    "react-redux": "^5.0.7",
-    "react-router-dom": "^4.3.1",
-    "react-scripts-ts": "2.16.0",
-    "react-transition-group": "^2.4.0",
-    "redux": "^4.0.0",
-    "redux-saga": "^0.16.0",
-    "tslib": "^1.9.3",
-    "typesafe-actions": "^2.0.4",
-    "url-search-params-polyfill": "^4.0.0",
-    "utility-types": "^2.0.0"
-  },
-  "scripts": {
-    "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
-  },
-  "devDependencies": {
-    "@types/jest": "^23.1.5",
-    "@types/node": "^10.5.2",
-    "@types/prop-types": "^15.5.3",
-    "@types/react": "^16.4.6",
-    "@types/react-dom": "^16.0.6",
-    "@types/react-lazyload": "^2.3.0",
-    "@types/react-redux": "^6.0.4",
-    "@types/react-router-dom": "^4.2.7",
-    "lodash": "^4.17.10",
-    "typescript": "^2.9.2"
-  }
+	"name": "nx04",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"fela": "^6.1.9",
+		"formik": "^0.11.11",
+		"react": "^16.4.1",
+		"react-dom": "^16.4.1",
+		"react-fela": "^7.3.1",
+		"react-helmet": "^5.2.0",
+		"react-lazyload": "^2.3.0",
+		"react-player": "^1.6.4",
+		"react-redux": "^5.0.7",
+		"react-router-dom": "^4.3.1",
+		"react-scripts-ts": "2.16.0",
+		"react-transition-group": "^2.4.0",
+		"redux": "^4.0.0",
+		"redux-saga": "^0.16.0",
+		"tslib": "^1.9.3",
+		"typesafe-actions": "^2.0.4",
+		"url-search-params-polyfill": "^4.0.1",
+		"utility-types": "^2.0.0"
+	},
+	"scripts": {
+		"start": "react-scripts-ts start",
+		"build": "react-scripts-ts build",
+		"test": "react-scripts-ts test --env=jsdom",
+		"eject": "react-scripts-ts eject"
+	},
+	"devDependencies": {
+		"@types/jest": "^23.1.5",
+		"@types/node": "^10.5.2",
+		"@types/prop-types": "^15.5.3",
+		"@types/react": "^16.4.6",
+		"@types/react-dom": "^16.0.6",
+		"@types/react-lazyload": "^2.3.0",
+		"@types/react-redux": "^6.0.4",
+		"@types/react-router-dom": "^4.2.7",
+		"@types/lodash": "^4.14.111",
+		"@types/react-helmet": "^5.0.6",
+		"@types/react-transition-group": "^2.0.11",
+		"lodash": "^4.17.10",
+		"typescript": "^2.9.2"
+	},
+	"jest": {
+		"moduleNameMapper": {
+			"^@src/(.*)$": "<rootDir>/src/$1"
+		}
+	}
 }

@@ -1,23 +1,17 @@
-import { Rules } from 'react-fela';
+import { IStyle } from 'fela';
 
-export interface Styles {
-	app: object;
-	body_no_pointer_events: object;
-}
+export const app_styles = {
+	app: {
+		alignContent: 'center',
+		display: 'flex',
+		flexDirection: 'column',
+		height: '100%',
+		minHeight: '100vh'
+	} as IStyle,
 
-export default (font: object, theme: object): Rules<object, Styles> => {
-	return {
-
-		// app
-		app: {
-			alignContent: 'center',
-			display: 'flex',
-			flexDirection: 'column',
-			height: '100%'
-		},
-
-		body_no_pointer_events: {
-			pointerEvents: 'none'
-		}
-	};
+	body_no_pointer_events: {
+		pointerEvents: 'none'
+	} as IStyle
 };
+
+export type AppStyles = typeof app_styles;

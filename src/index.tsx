@@ -35,7 +35,8 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSaga);
 
-import App from './App';
+// ---------------------- OUR OWN APPLICATION ----------------------
+import App from '@src/App';
 
 // ----------------- add static files to fela -----------------
 // renderer.renderStatic(normalizeCSS.toString().replace(/\*.+?\*/g, ''));

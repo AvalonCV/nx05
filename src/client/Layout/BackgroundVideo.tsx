@@ -13,19 +13,19 @@ import { connectWithRedux } from '@src/client/HOC/connectWithRedux';
 // tslint:disable-next-line:max-line-length
 import { ExecutableBackgroundContainerActions, BackgroundContainerState } from '@src/shared/state/background_container';
 
-
-export interface BackgroundVideoState { }
-export interface BackgroundVideoProps { }
+export interface BackgroundVideoState {}
+export interface BackgroundVideoProps {}
 
 // tslint:disable-next-line:max-line-length
-type BackgroundVideoProperties = BackgroundVideoProps & ExecutableBackgroundContainerActions & BackgroundContainerState & FelaWithStylesProps<BackgroundVideoProps, BackgroundVideoStyles, {}>;
+type BackgroundVideoProperties = BackgroundVideoProps &
+	ExecutableBackgroundContainerActions &
+	BackgroundContainerState &
+	FelaWithStylesProps<BackgroundVideoProps, BackgroundVideoStyles, {}>;
 
 let test_counter = 0;
 
 class BackgroundVideoWrapper extends React.PureComponent<BackgroundVideoProperties, object> {
-
 	public render() {
-
 		// console.log('this.props', test_counter, this.props.is_video_visible, this.props.is_video_loading);
 		if (test_counter > 10) {
 			return <div>Still a bit sad about this :( 2</div>;
@@ -60,12 +60,12 @@ class BackgroundVideoWrapper extends React.PureComponent<BackgroundVideoProperti
 				playbackRate={0.4}
 				url={background_video}
 			/>
-
 		);
 	}
 }
 
 export const BackgroundVideoContainer = connectWithRedux(
-	connect<BackgroundVideoProps, {}, {}>(BackgroundVideoStyles)(BackgroundVideoWrapper),
+	// tslint:disable-next-line:no-any
+	connect<BackgroundVideoProps, {}, {}>(BackgroundVideoStyles)(BackgroundVideoWrapper as any),
 	['background_container']
 );
