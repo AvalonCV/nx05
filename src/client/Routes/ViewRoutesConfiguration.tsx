@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Route, Link, Redirect, Switch } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Location } from 'history';
 import Helmet from 'react-helmet';
 
@@ -8,6 +7,8 @@ import { MainAuthenticatedLayout, MainExternalLayout } from '@src/client/Compone
 // import View-Components
 import { Login } from '@src/client/Components/Login/Login';
 import { TodoView } from '@src/client/Views/TodoView';
+import { DocumentView } from '@src/client/Views/DocumentView';
+import { FadeTransitionContainer } from '@src/client/Components/PageElements/TransitionContainer';
 
 // put them in a separate file
 const Home: React.StatelessComponent<{}> = props => {
@@ -110,6 +111,13 @@ const route_configuration: ViewRouteElement[] = [
 		needs_authentification: false,
 		path: '/',
 		sensitive: false
+	},
+	{
+		component: DocumentView,
+		exact: true,
+		needs_authentification: false,
+		path: '/:shorturl?/d/:document_objid', // e.g. /privacy-statement/d/123
+		sensitive: false
 	}
 ];
 
@@ -127,24 +135,19 @@ const RouteHandler = (props: ViewRouteElement): JSX.Element | null => {
 					path={path}
 					exact={exact}
 					sensitive={sensitive}
-					// tslint:disable-next-line:only-arrow-functions
-					// render={function(newprops: object) {
-					// 	return (
-					// 		<React.Fragment>
-					// 			<Component />
-					// 		</React.Fragment>
-					// 	);
-					// }}
-					// component={Component}
-				>
-					<React.Fragment>
-						<Helmet>
-							<title>NX04</title>
-							<meta name="description" content="" />
-						</Helmet>
-						<Component />
-					</React.Fragment>
-				</Route>
+					// tslint:disable-next-line:typedef
+					children={({ match: match }) => {
+						return (
+							<React.Fragment>
+								<Helmet>
+									<title>NX04</title>
+									<meta name="description" content="" />
+								</Helmet>
+								<Component {...(match ? match.params : {})} />
+							</React.Fragment>
+						);
+					}}
+				/>
 			);
 		}
 	} else {
@@ -172,20 +175,9 @@ export const ViewRoutes = (props: RouterStatus): JSX.Element => {
 
 	return (
 		<LayoutComponent>
-			<TransitionGroup component={null}>
-				<CSSTransition
-					key={props.location.pathname}
-					classNames="fade"
-					timeout={1000}
-					unmountOnExit={true}
-					addEndListener={(node, done) => {
-						// use the css transitionend event to mark the finish of a transition
-						node.addEventListener('transitionend', done, false);
-					}}
-				>
-					<Switch location={props.location}>{routes}</Switch>
-				</CSSTransition>
-			</TransitionGroup>
+			<FadeTransitionContainer transition_key={props.location.pathname} timeout={300}>
+				<Switch location={props.location}>{routes}</Switch>
+			</FadeTransitionContainer>
 		</LayoutComponent>
 	);
 };

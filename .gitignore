@@ -22,4 +22,5 @@ yarn-error.log*
 
 # data
 article-data.json
+data-privacy.js
 *.json

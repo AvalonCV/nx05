@@ -11,7 +11,7 @@ import { BackgroundContainerSaga, BackgroundContainerReducer } from '@src/shared
 import { createRenderer } from 'fela';
 import { Provider as FelaProvider } from 'react-fela';
 // create fela renderer
-const renderer = createRenderer();
+const renderer = createRenderer({});
 
 // ---------------------- CLIENT SIDE ROUTING ----------------------
 import { HashRouter as Router } from 'react-router-dom';

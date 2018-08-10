@@ -14,12 +14,12 @@ export const login_styles = {
 		maxWidth: '1024px',
 		width: '100%',
 		margin: '0 auto',
-		boxShadow: '0 0 4px gray',
+		boxShadow: '0 0 8px rgba(255, 255, 255, 0.7)',
 		backgroundColor: 'white',
-		flexGrow: 0,
-		minHeight: '450px',
-		marginBottom: '150px',
+		flexGrow: 1,
+		minHeight: '50vh',
 		padding: '2em',
+		paddingBottom: '90px',
 		borderRadius: '2px',
 		boxSizing: 'border-box',
 		position: 'relative'
@@ -40,6 +40,17 @@ export const login_styles = {
 		position: 'absolute',
 		top: '6em',
 		right: '2em'
+	} as IStyle,
+
+	footer: {
+		position: 'absolute',
+		backgroundColor: '#222',
+		color: 'white',
+		height: '90px',
+		width: '100%',
+		left: 0,
+		right: 0,
+		bottom: 0
 	} as IStyle
 };
 

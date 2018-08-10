@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import { Link } from 'react-router-dom';
 
 import { connect, FelaWithStylesProps } from 'react-fela';
@@ -13,6 +12,8 @@ import { Formik, FormikProps, Form, Field, FieldProps, FormikActions } from 'for
 import { VirtualList } from '@src/client/Components/VirtualList/VirtualList';
 
 import logo from '@src/shared/images/Puma_Cat.svg';
+import logoGooglePlay from '@src/shared/images/Get_it_on_Google_play.svg';
+import logoAppleAppStore from '@src/shared/images/Download_on_the_App_Store_Badge.svg';
 
 export interface LoginState {}
 export interface LoginProps {}
@@ -123,12 +124,31 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 						<li>
 							<Link to="/todo">TODO</Link>
 						</li>
+						<li>
+							<Link to="/privacy-statement/d/1">Privacy Statement</Link>
+						</li>
 					</ul>
 					{LoginForm}
 
 					<VList />
 
 					<img className={this.props.styles.logo} src={logo} />
+
+					<div className={this.props.styles.footer}>
+						<ul>
+							<li>
+								<a href="#">
+									<img src={logoGooglePlay} />
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img src={logoAppleAppStore} />
+								</a>
+							</li>
+							<li>3</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		);

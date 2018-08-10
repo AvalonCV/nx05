@@ -5,8 +5,11 @@
 
 import * as React from 'react';
 import { connect, FelaWithStylesProps } from 'react-fela';
-import { MainLayoutStyles, main_layout_styles } from './MainLayoutStyles';
+
+import { MainLayoutStyles, main_layout_styles } from '@src/client/Components/Layout/MainLayoutStyles';
 import { FelaStylesForUnconnectedProps } from '@src/shared/css/FelaStyles';
+
+import HeaderLogo from '@src/shared/images/Puma_Cat_black.svg';
 
 interface LayoutProps {
 	children: JSX.Element | JSX.Element[];
@@ -22,7 +25,12 @@ const Header: React.StatelessComponent<HeaderProperties> = (props: HeaderPropert
 	const { styles } = props;
 	return (
 		<header className={styles.header}>
-			<div className={styles.header_content_area}>Logo | {Date.now()} | | Change Language</div>
+			<div className={styles.header_content_area}>
+				<div className={styles.header_logo_container}>
+					<img className={styles.header_logo_image} src={HeaderLogo} />
+				</div>
+				<span> | {Date.now()} | | Change Language</span>
+			</div>
 		</header>
 	);
 };
@@ -32,7 +40,7 @@ const main_external_layout: React.StatelessComponent<LayoutProperties> = (props:
 	return (
 		<div className={styles.main_layout}>
 			<Header styles={styles} />
-			<div className={styles.content_area}>{children}</div>
+			<main className={styles.content_area}>{children}</main>
 		</div>
 	);
 };

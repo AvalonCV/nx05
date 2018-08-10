@@ -4,21 +4,21 @@
 	font-family: 'Open Sans';
 	font-style: normal;
 	font-weight: 400;
-	src: url("./../fonts/OpenSans-Light.woff") format("woff");
+	src: url('./../fonts/OpenSans-Light.woff') format('woff');
 }
 
 @font-face {
 	font-family: 'Open Sans';
 	font-style: italic;
 	font-weight: 400;
-	src: url("./../fonts/OpenSans-LightItalic.woff") format("woff");
+	src: url('./../fonts/OpenSans-LightItalic.woff') format('woff');
 }
 
 @font-face {
 	font-family: 'Open Sans';
 	font-style: normal;
 	font-weight: 700;
-	src: url("./../fonts/OpenSans-Regular.woff") format("woff");
+	src: url('./../fonts/OpenSans-Regular.woff') format('woff');
 }
 
 html,
@@ -28,22 +28,33 @@ body {
 
 body {
 	position: relative;
-	background-image: url(./../videos/Northernlights2_HD.out2.poster.jpg);
-	background-size: cover;
-	background-attachment: fixed;
-	background-repeat: no-repeat;
 	color: #4d4d4d;
 	font-family: 'Open Sans', sans-serif;
-	/* should lead to a height of '14px', as the default font-size is '16px' */
+	/* should lead to a height of '24px', as the default font-size is '16px' */
 	line-height: 1.5;
-	font-size: 18px;
-	font-size: calc(14px + 0.3vw);
+	/*	font-size: calc(14px + 0.3vw); */
+	font-size: calc(14px + (100vw / 512));
 	display: flex;
 	flex-direction: column;
+	overflow-y: scroll;
 }
 
 #root {
 	flex-grow: 1;
+}
+
+#root:before {
+	background-image: url(./../videos/Northernlights2_HD.out2.poster.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	content: '';
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	will-change: transform;
+	z-index: -1;
 }
 
 /* Lists are used for semantic purposes all around the layout. If we need nicer looking
@@ -110,7 +121,6 @@ h6 {
 	color: #982018;
 }
 
-
 /* generic CSS-transition */
 .fade-enter {
 	position: relative;
@@ -129,10 +139,93 @@ h6 {
 	right: 0;
 	opacity: 1;
 	z-index: -1;
-
 }
 .fade-exit.fade-exit-active {
 	opacity: 0;
 	transition: opacity 300ms ease-in;
 }
 
+.document-view {
+	width: 100%;
+	display: flex;
+}
+
+.page-container {
+	margin: 0.75em 1.5em;
+	background-color: white;
+	box-shadow: 0 1px 6px white;
+	flex-grow: 1;
+	border-radius: 2px;
+}
+
+.breadcrumb {
+	border-bottom: 1px solid firebrick;
+	padding: 0.5em 1em;
+}
+
+
+
+.page {
+	padding: 0.5em 1em;
+}
+
+.page > .content {
+	max-width: 1024px;
+	width: 100%;
+	position: relative;
+	box-shadow: 0 0 4px gray;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+.page > .content h1,
+.page > .content h2,
+.page > .content h3,
+.page > .content h4 {
+	margin: 1em 0 0.5em;
+}
+
+.page > .content p {
+	margin: 0.75em 0 0.3em;
+	text-align: justify;
+	hyphens: auto;
+}
+
+.page > .content hr {
+	overflow: hidden;
+	height: 1em;
+	border: 0;
+}
+
+.page > .content hr:after {
+	content: '';
+	display: block;
+	margin: -25px auto 0;
+	height: 25px;
+	border-radius: 125px / 12px;
+	box-shadow: 0 0 8px gray;
+}
+
+.page > .content ul,
+.page > .content ol {
+	padding-left: 40px;
+}
+
+.page > .content ul {
+	list-style: disc;
+}
+
+.page > .content ol {
+	list-style: decimal;
+}
+
+.page > .content li {
+	margin: 0.75em 0 0.3em;
+	text-align: justify;
+}
+
+
+.page > .content > * > *:not(hr):not(picture) {
+	margin-left: 10%;
+	margin-right: 10%;
+}

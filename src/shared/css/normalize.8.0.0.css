@@ -27,6 +27,14 @@ body {
 }
 
 /**
+ * Render the `main` element consistently in IE.
+ */
+
+main {
+	display: block;
+}
+
+/**
    * Correct the font size and margin on `h1` elements within `section` and
    * `article` contexts in Chrome, Firefox, and Safari.
    */
@@ -168,9 +176,9 @@ select,
 textarea {
 	font-family: inherit;
 	/* 1 */
-	font-size: 100%;
+	font-size: inherit;
 	/* 1 */
-	line-height: 1.15;
+	line-height: inherit;
 	/* 1 */
 	margin: 0;
 	/* 2 */
@@ -196,6 +204,16 @@ button,
 select {
 	/* 1 */
 	text-transform: none;
+}
+
+/**
+ * Remove the default apparence of select on all browsers
+ */
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
 
 /**

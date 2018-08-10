@@ -13,21 +13,35 @@ export const main_layout_styles = {
 		boxShadow: '1px 0 3px black',
 		transform: 'translateZ(0)',
 		flexGrow: 0,
-		flexShrink: 0
+		flexShrink: 0,
+		backgroundImage: 'linear-gradient(#efefef, #c7c7c7)'
+	} as IStyle,
+
+	header_logo_container: {
+		width: '80px',
+		margin: '0.5em 0'
+	} as IStyle,
+
+	header_logo_image: {
+		display: 'block',
+		width: '100%',
+		height: 'auto'
 	} as IStyle,
 
 	header_content_area: {
 		width: '100%',
 		maxWidth: '1024px',
 		marginLeft: 'auto',
-		marginRight: 'auto'
+		marginRight: 'auto',
+		display: 'flex',
+		alignItems: 'center'
 		// backgroundColor: '#004e7e',
 		// color: 'white'
 	} as IStyle,
 
 	content_area: {
 		flexGrow: 1,
-		flexBasis: '0',
+		flexBasis: 'auto',
 		minHeight: 0,
 		display: 'flex',
 		position: 'relative'
