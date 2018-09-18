@@ -4,15 +4,15 @@
 	"private": true,
 	"dependencies": {
 		"dom-helpers": "^3.3.1",
-		"fela": "^6.1.9",
-		"fela-plugin-extend": "^6.0.7",
+		"fela": "^6.2.1",
+		"fela-plugin-extend": "^6.0.9",
 		"formik": "^0.11.11",
-		"react": "^16.4.2",
-		"react-dom": "^16.4.2",
+		"react": "^16.5.2",
+		"react-dom": "^16.5.2",
 		"react-fela": "^7.3.1",
 		"react-helmet": "^5.2.0",
 		"react-lazyload": "^2.3.0",
-		"react-markdown": "^3.4.1",
+		"react-markdown": "^3.6.0",
 		"react-player": "^1.6.4",
 		"react-redux": "^5.0.7",
 		"react-router-dom": "^4.3.1",
@@ -23,7 +23,7 @@
 		"tslib": "^1.9.3",
 		"typesafe-actions": "^2.0.4",
 		"url-search-params-polyfill": "^4.0.1",
-		"utility-types": "^2.0.0"
+		"utility-types": "^2.1.0"
 	},
 	"scripts": {
 		"start": "react-scripts-ts start",
@@ -31,19 +31,20 @@
 		"test": "react-scripts-ts test --env=jsdom",
 		"eject": "react-scripts-ts eject"
 	},
+	"proxy": "http://localhost:4000",
 	"devDependencies": {
-		"@types/jest": "^23.3.1",
+		"@types/jest": "^23.3.2",
 		"@types/lodash": "^4.14.116",
-		"@types/node": "^10.5.7",
+		"@types/node": "^10.10.1",
 		"@types/prop-types": "^15.5.5",
-		"@types/react": "^16.4.9",
+		"@types/react": "^16.4.14",
 		"@types/react-dom": "^16.0.7",
 		"@types/react-helmet": "^5.0.7",
 		"@types/react-lazyload": "^2.3.1",
-		"@types/react-redux": "^6.0.6",
-		"@types/react-router-dom": "^4.3.0",
-		"@types/react-transition-group": "^2.0.13",
-		"lodash": "^4.17.10",
+		"@types/react-redux": "^6.0.9",
+		"@types/react-router-dom": "^4.3.1",
+		"@types/react-transition-group": "^2.0.14",
+		"lodash": "^4.17.11",
 		"typescript": "^2.9.2"
 	},
 	"jest": {

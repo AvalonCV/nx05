@@ -8,7 +8,7 @@ import { MainAuthenticatedLayout, MainExternalLayout } from '@src/client/Compone
 import { Login } from '@src/client/Components/Login/Login';
 import { TodoView } from '@src/client/Views/TodoView';
 import { DocumentView } from '@src/client/Views/DocumentView';
-import { FadeTransitionContainer } from '@src/client/Components/PageElements/TransitionContainer';
+import { FadePageTransitionContainer } from '@src/client/Components/PageElements/TransitionContainer';
 
 // put them in a separate file
 const Home: React.StatelessComponent<{}> = props => {
@@ -175,9 +175,9 @@ export const ViewRoutes = (props: RouterStatus): JSX.Element => {
 
 	return (
 		<LayoutComponent>
-			<FadeTransitionContainer transition_key={props.location.pathname} timeout={300}>
+			<FadePageTransitionContainer transition_key={props.location.pathname} timeout={400}>
 				<Switch location={props.location}>{routes}</Switch>
-			</FadeTransitionContainer>
+			</FadePageTransitionContainer>
 		</LayoutComponent>
 	);
 };

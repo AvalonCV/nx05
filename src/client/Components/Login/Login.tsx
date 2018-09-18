@@ -57,12 +57,28 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 		const LoginForm = (
 			<Formik
 				initialValues={{ login: '', password: '' }}
-				onSubmit={(values: LoginFormProps, formikBag: FormikActions<LoginFormProps>) => {
-					console.log('form state', JSON.stringify(values));
-					window.setTimeout(() => {
-						formikBag.setSubmitting(false);
-						// tslint:disable-next-line:align
-					}, 1000);
+				onSubmit={async (values: LoginFormProps, formikBag: FormikActions<LoginFormProps>) => {
+					const login_credentials = new URLSearchParams();
+					for (const key of Object.keys(values)) {
+						login_credentials.append(key, values[key]);
+					}
+					console.log('form state', JSON.stringify(values), login_credentials.toString());
+
+					try {
+						const response = await fetch('/interface/session/login?' + login_credentials.toString(), {
+							method: 'get',
+							credentials: 'same-origin'
+						});
+
+						console.log('response valid', response);
+					} catch (error) {
+						console.error(error);
+					} finally {
+						window.setTimeout(() => {
+							formikBag.setSubmitting(false);
+							// tslint:disable-next-line:align
+						}, 1000);
+					}
 				}}
 				render={(formikBag: FormikProps<LoginFormProps>) => (
 					<Form method="get">
@@ -98,6 +114,7 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 								</div>
 							)}
 						/>
+
 						<button disabled={formikBag.isSubmitting} type="submit">
 							Submit
 						</button>
@@ -129,6 +146,20 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 						</li>
 					</ul>
 					{LoginForm}
+
+					<div>
+						<span className="radio_with_css" />
+						<span className="radio_with_css checked" />
+						<span className="mytext">MgAnd more text</span>
+					</div>
+					<div>
+						<span className="radio_with_css checked" />
+						<span className="mytext">QgAnd more text</span>
+					</div>
+					<div>
+						<span className="radio_with_css checked" />
+						<span className="mytext">MgAnd more text</span>
+					</div>
 
 					<VList />
 

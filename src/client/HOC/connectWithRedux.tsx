@@ -64,5 +64,6 @@ export const connectWithRedux = <P extends WrappedComponentProps>(
 	return connect(
 		mapStateToProps,
 		mapDispatchToProps
-	)(WrappedComponent);
+		// tslint:disable-next-line:no-any
+	)(WrappedComponent as any);
 };

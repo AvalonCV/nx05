@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
-import * as ReactMarkdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown';
+import { Link } from 'react-router-dom';
 
 import { DataPrivacyContent } from '@src/shared/data/data-privacy.js';
 import { PageElementLoader } from '@src/client/Components/Loaders/PageElement';
@@ -23,7 +24,9 @@ interface DocumentPageProps {
 const Page: React.StatelessComponent<DocumentPageProps> = (props: DocumentPageProps) => {
 	return (
 		<div className="page-container">
-			<div className="breadcrumb">Home > Current > bla</div>
+			<div className="breadcrumb">
+				<Link to="/home">Home</Link> > Current > bla
+			</div>
 			<div className="page">
 				<div className="content">{props.children}</div>
 			</div>

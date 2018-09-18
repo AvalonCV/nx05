@@ -5,9 +5,10 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { TMultiRuleObject } from 'fela-tools';
 import { difference } from 'lodash';
 
-import { removeClass as removeOneClass } from 'dom-helpers/class';
+import { removeClass as removeOneClass, addClass } from 'dom-helpers/class';
 
 interface TransitionContainerStyles {
+	body_styles: IStyle;
 	appear: IStyle;
 	appear_active: IStyle;
 	appear_active_combined?: IStyle;
@@ -57,6 +58,9 @@ const TransitionContainerForFela: React.StatelessComponent<Properties> = (props:
 				}}
 				onEntering={node => {
 					removeClass(node, removable_enter_classes);
+					if (props.styles.body_styles !== '') {
+						addClass(document.body, props.styles.body_styles);
+					}
 				}}
 				onExiting={node => {
 					removeClass(node, removable_exit_classes);
@@ -65,7 +69,16 @@ const TransitionContainerForFela: React.StatelessComponent<Properties> = (props:
 				unmountOnExit={true}
 				addEndListener={(node, done) => {
 					// use the css transitionend event to mark the finish of a transition
-					node.addEventListener('transitionend', done, false);
+					node.addEventListener(
+						'transitionend',
+						() => {
+							done();
+							if (props.styles.body_styles !== '') {
+								removeOneClass(document.body, props.styles.body_styles);
+							}
+						},
+						false
+					);
 				}}
 			>
 				{props.children}
@@ -74,7 +87,7 @@ const TransitionContainerForFela: React.StatelessComponent<Properties> = (props:
 	);
 };
 
-const mapStylesToProps = (
+const mapFadePageStylesToProps = (
 	props: TransitionContainerProps,
 	renderer: IRenderer
 ): TMultiRuleObject<Properties, TransitionContainerStyles> => {
@@ -82,7 +95,7 @@ const mapStylesToProps = (
 
 	const base_styles = {
 		position: 'absolute',
-		transitionProperty: 'opacity',
+		transitionProperty: 'opacity, transform',
 		transitionDuration: `${timeout}ms`,
 		left: 0,
 		top: 0,
@@ -91,6 +104,53 @@ const mapStylesToProps = (
 	} as IStyle;
 
 	return {
+		body_styles: {
+			overflowX: 'hidden'
+		},
+		appear: {} as IStyle,
+		appear_active: {} as IStyle,
+		enter: {
+			...base_styles,
+			opacity: 0,
+			transform: 'scale(1.025, 1.0125)',
+			transitionTimingFunction: 'ease-out'
+		} as IStyle,
+		enter_active: {
+			...base_styles,
+			opacity: 1,
+			transform: 'scale(1)',
+			transitionTimingFunction: 'ease-out'
+		} as IStyle,
+		enter_done: {} as IStyle,
+		exit: {
+			...base_styles,
+			opacity: 1,
+			transitionTimingFunction: 'ease-in',
+			zIndex: -1
+		} as IStyle,
+		exit_active: {
+			...base_styles,
+			opacity: 0,
+			transitionTimingFunction: 'ease-in',
+			zIndex: -1
+		} as IStyle,
+		exit_done: {} as IStyle
+	};
+};
+
+const mapFadeStylesToProps = (
+	props: TransitionContainerProps,
+	renderer: IRenderer
+): TMultiRuleObject<Properties, TransitionContainerStyles> => {
+	const { timeout = 1000 } = props;
+
+	const base_styles = {
+		transitionProperty: 'opacity',
+		transitionDuration: `${timeout}ms`
+	} as IStyle;
+
+	return {
+		body_styles: {},
 		appear: {} as IStyle,
 		appear_active: {} as IStyle,
 		enter: {
@@ -120,7 +180,12 @@ const mapStylesToProps = (
 	};
 };
 
+export const FadePageTransitionContainer = connect<TransitionContainerProps, TransitionContainerStyles>(
+	// tslint:disable-next-line:no-any
+	mapFadePageStylesToProps as any
+)(TransitionContainerForFela);
+
 export const FadeTransitionContainer = connect<TransitionContainerProps, TransitionContainerStyles>(
 	// tslint:disable-next-line:no-any
-	mapStylesToProps as any
+	mapFadeStylesToProps as any
 )(TransitionContainerForFela);

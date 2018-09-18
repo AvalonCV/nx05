@@ -5,6 +5,7 @@
 
 import * as React from 'react';
 import { connect, FelaWithStylesProps } from 'react-fela';
+import { Link } from 'react-router-dom';
 
 import { MainLayoutStyles, main_layout_styles } from '@src/client/Components/Layout/MainLayoutStyles';
 import { FelaStylesForUnconnectedProps } from '@src/shared/css/FelaStyles';
@@ -27,7 +28,9 @@ const Header: React.StatelessComponent<HeaderProperties> = (props: HeaderPropert
 		<header className={styles.header}>
 			<div className={styles.header_content_area}>
 				<div className={styles.header_logo_container}>
-					<img className={styles.header_logo_image} src={HeaderLogo} />
+					<Link to="/">
+						<img className={styles.header_logo_image} src={HeaderLogo} />
+					</Link>
 				</div>
 				<span> | {Date.now()} | | Change Language</span>
 			</div>

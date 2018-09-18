@@ -2,7 +2,8 @@ import * as React from 'react';
 import { connect as connectWithFela, FelaWithStylesProps } from 'react-fela';
 import { withRouter } from 'react-router-dom';
 import { Location } from 'history';
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
+import { removeClass, addClass } from 'dom-helpers/class';
 
 import { AppStyles, app_styles } from '@src/AppStyles';
 
@@ -44,14 +45,14 @@ class App extends React.PureComponent<Properties, AppState> {
 		let is_scroll_active = false;
 		const body_class = this.props.styles.body_no_pointer_events;
 		const removePointerEvents = debounce(() => {
-			document.body.className = '';
+			removeClass(document.body, body_class);
 			is_scroll_active = false;
 			// tslint:disable-next-line:align
 		}, 250);
 		window.addEventListener('scroll', () => {
 			if (!is_scroll_active) {
 				is_scroll_active = true;
-				document.body.className = body_class;
+				addClass(document.body, body_class);
 			}
 			removePointerEvents();
 		});
