@@ -3,7 +3,7 @@ import { Route, Link, Redirect, Switch } from 'react-router-dom';
 import { Location } from 'history';
 import Helmet from 'react-helmet';
 
-import { MainAuthenticatedLayout, MainExternalLayout } from '@src/client/Components/Layout/MainLayout';
+import { MainLayout } from '@src/client/Components/Layout/MainLayout';
 // import View-Components
 import { Login } from '@src/client/Components/Login/Login';
 import { TodoView } from '@src/client/Views/TodoView';
@@ -121,7 +121,7 @@ const route_configuration: ViewRouteElement[] = [
 	}
 ];
 
-const is_session_authenticaed = false;
+const is_session_authenticaed = true;
 
 const RouteHandler = (props: ViewRouteElement): JSX.Element | null => {
 	const { path, needs_authentification, component: Component, exact = true, sensitive = true } = props;
@@ -167,17 +167,15 @@ interface RouterStatus {
 }
 
 export const ViewRoutes = (props: RouterStatus): JSX.Element => {
-	const LayoutComponent = is_session_authenticaed ? MainAuthenticatedLayout : MainExternalLayout;
-
 	const routes = route_configuration.map((route_element, index) => {
 		return <RouteHandler key={index} {...route_element} />;
 	});
 
 	return (
-		<LayoutComponent>
+		<MainLayout is_authenticated={is_session_authenticaed}>
 			<FadePageTransitionContainer transition_key={props.location.pathname} timeout={400}>
 				<Switch location={props.location}>{routes}</Switch>
 			</FadePageTransitionContainer>
-		</LayoutComponent>
+		</MainLayout>
 	);
 };

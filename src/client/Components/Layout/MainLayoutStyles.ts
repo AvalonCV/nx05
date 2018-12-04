@@ -1,5 +1,7 @@
 import { IStyle } from 'fela';
 
+const sidebar_width = 96;
+
 export const main_layout_styles = {
 	main_layout: {
 		display: 'flex',
@@ -14,7 +16,13 @@ export const main_layout_styles = {
 		transform: 'translateZ(0)',
 		flexGrow: 0,
 		flexShrink: 0,
-		backgroundImage: 'linear-gradient(#efefef, #c7c7c7)'
+		backgroundImage: 'linear-gradient(#efefef, #c7c7c7)',
+		position: 'relative',
+		marginLeft: sidebar_width + 'px',
+		boxSizing: 'border-box',
+		'@media (min-width: 768px)': {
+			marginLeft: sidebar_width + 'px'
+		}
 	} as IStyle,
 
 	header_logo_container: {
@@ -44,7 +52,65 @@ export const main_layout_styles = {
 		flexBasis: 'auto',
 		minHeight: 0,
 		display: 'flex',
-		position: 'relative'
+		position: 'relative',
+		marginLeft: sidebar_width + 'px',
+		boxSizing: 'border-box'
+	} as IStyle,
+
+	// left side navigation
+	side_navigation: {
+		position: 'fixed',
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'space-between',
+		width: sidebar_width + 'px',
+		height: '100%',
+		backgroundColor: 'white',
+		boxSizing: 'border-box',
+		borderRight: '2px solid #982018',
+		boxShadow: '2px 0px 6px rgba(128, 128, 128, 0.7)',
+		willChange: 'transform',
+		transform: 'translateZ(0)'
+	} as IStyle,
+
+	side_navigation_list_top: {
+		marginTop: '120px'
+	} as IStyle,
+
+	side_navigation_list_bottom: {} as IStyle,
+
+	side_navigation_list_item: {
+		textAlign: 'center',
+		borderBottom: '1px solid lightgray'
+	} as IStyle,
+
+	side_navigation_list_item_link: {
+		padding: '0.25em',
+		paddingTop: '0.75em',
+		minHeight: '5rem',
+		boxSizing: 'border-box',
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		transition: 'background-color 300ms',
+		':hover': {
+			backgroundColor: '#982018',
+			color: 'white'
+		},
+		':focus': {
+			backgroundColor: '#982018',
+			color: 'white'
+		}
+	} as IStyle,
+
+	side_navigation_list_item_text: {
+		display: 'block',
+		fontWeight: 'bold',
+		fontSize: '85%'
+	} as IStyle,
+
+	side_navigation_list_item_icon: {
+		fontSize: '125%'
 	} as IStyle
 };
 

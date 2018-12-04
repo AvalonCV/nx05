@@ -12,7 +12,7 @@ export const throttleByRequestAnimationFrame = (callback: () => void, that?: obj
 			is_scheduled = true;
 			// tslint:disable-next-line:only-arrow-functions - because we need 'arguments'
 			window.requestAnimationFrame(function() {
-				callback.apply(that, arguments);
+				callback.apply(that, []);
 				is_scheduled = false;
 			});
 		}

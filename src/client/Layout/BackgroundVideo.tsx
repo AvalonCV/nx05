@@ -66,6 +66,6 @@ class BackgroundVideoWrapper extends React.PureComponent<BackgroundVideoProperti
 
 export const BackgroundVideoContainer = connectWithRedux(
 	// tslint:disable-next-line:no-any
-	connect<BackgroundVideoProps, {}, {}>(BackgroundVideoStyles)(BackgroundVideoWrapper as any),
+	connect<BackgroundVideoProps, {}, {}>(BackgroundVideoStyles)(BackgroundVideoWrapper as any) as any,
 	['background_container']
 );

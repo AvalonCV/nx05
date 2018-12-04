@@ -161,9 +161,14 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 						<span className="mytext">MgAnd more text</span>
 					</div>
 
+					<div>
+						<input type="radio" value="1" checked={true} />
+						<span className="mytext">MgAnd more text</span>
+					</div>
+
 					<VList />
 
-					<img className={this.props.styles.logo} src={logo} />
+					<img className={this.props.styles.logo} height="779" width="1000" src={logo} />
 
 					<div className={this.props.styles.footer}>
 						<ul>
@@ -188,6 +193,6 @@ class LoginForFela extends React.PureComponent<Properties, LoginState> {
 
 export const Login = connectWithRedux(
 	// tslint:disable-next-line:no-any
-	connect<LoginProps, LoginStyles>(login_styles as LoginStyles)(LoginForFela as any),
+	connect<LoginProps, LoginStyles>(login_styles as LoginStyles)(LoginForFela as any) as any,
 	['session']
 );

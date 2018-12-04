@@ -225,7 +225,7 @@ h6 {
 }
 
 
-.page > .content > * > *:not(hr):not(picture) {
+.page > .content > *:not(hr):not(picture) {
 	margin-left: 10%;
 	margin-right: 10%;
 }

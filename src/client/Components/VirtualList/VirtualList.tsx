@@ -32,13 +32,13 @@ interface VirtualListState {
 
 interface VirtualListProps {}
 
-type mapItemToProperties<T> = (item: T) => object;
+type mapItemToProperties<T> = (item: T) => T;
 
 export interface VirtualListOptions<T> {
 	items: ReadonlyArray<T>;
 	contain_list_children: boolean;
 	className?: string;
-	mapItemToProperties?: mapItemToProperties<T>;
+	mapItemToProperties: mapItemToProperties<T>;
 }
 
 type Properties = VirtualListProps & FelaWithStylesProps<VirtualListProps, VirtualListStyles>;
@@ -101,28 +101,49 @@ export const VirtualList = <T extends object>(options: VirtualListOptions<T>) =>
 					return retval;
 				};
 
-				const new_state: VirtualListState = Array.prototype.reduce.call(
-					this._list_container_element_ref.children,
-					(state: VirtualListState, element: HTMLElement, index: number) => {
-						if (!calculation_done) {
+				const new_state: VirtualListState = { ...this.state };
+				Array.from(this._list_container_element_ref.children).forEach((element: Element, index: number) => {
+					if (!calculation_done) {
+						if (element instanceof HTMLElement) {
 							const { offsetTop, offsetHeight } = element;
 							max_item_heigth_of_current_row = Math.max(max_item_heigth_of_current_row, offsetHeight);
 
 							if (current_offset_top === null) {
 								current_offset_top = offsetTop;
-								state.items_per_row = 1;
-							} else if (current_offset_top === offsetTop && state.items_per_row) {
-								state.items_per_row++;
+								new_state.items_per_row = 1;
+							} else if (current_offset_top === offsetTop && new_state.items_per_row) {
+								new_state.items_per_row++;
 							} else {
 								// Done. We have reached the next row
-								state.item_height = max_item_heigth_of_current_row;
+								new_state.item_height = max_item_heigth_of_current_row;
 								calculation_done = true;
 							}
 						}
-						return state;
-					},
-					{ ...this.state }
-				);
+					}
+				});
+
+				// const new_state: VirtualListState = Array.prototype.reduce.call(
+				// 	this._list_container_element_ref.children,
+				// 	(state: VirtualListState, element: HTMLElement, index: number) => {
+				// 		if (!calculation_done) {
+				// 			const { offsetTop, offsetHeight } = element;
+				// 			max_item_heigth_of_current_row = Math.max(max_item_heigth_of_current_row, offsetHeight);
+
+				// 			if (current_offset_top === null) {
+				// 				current_offset_top = offsetTop;
+				// 				state.items_per_row = 1;
+				// 			} else if (current_offset_top === offsetTop && state.items_per_row) {
+				// 				state.items_per_row++;
+				// 			} else {
+				// 				// Done. We have reached the next row
+				// 				state.item_height = max_item_heigth_of_current_row;
+				// 				calculation_done = true;
+				// 			}
+				// 		}
+				// 		return state;
+				// 	},
+				// 	{ ...this.state }
+				// );
 
 				// number of vertical elements in viewport
 				new_state.max_visible_rows_in_viewport = Math.ceil(window.innerHeight / max_item_heigth_of_current_row);
@@ -215,13 +236,9 @@ export const VirtualList = <T extends object>(options: VirtualListOptions<T>) =>
 						ref={this.setListContainerElement}
 					>
 						{items.map((item, index: number) => {
-							let props = {};
-							if (options.mapItemToProperties) {
-								props = options.mapItemToProperties(item);
-							}
 							return (
 								<li className={this.props.styles.list_item} key={first_item_index + index}>
-									<ListItemComponent {...props} />
+									<ListItemComponent {...options.mapItemToProperties(item)} />
 								</li>
 							);
 						})}
