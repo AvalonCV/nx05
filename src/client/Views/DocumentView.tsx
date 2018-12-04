@@ -3,10 +3,10 @@ import { Helmet } from 'react-helmet';
 import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 
-import { DataPrivacyContent } from '@src/shared/data/data-privacy.js';
-import { PageElementLoader } from '@src/client/Components/Loaders/PageElement';
-import { ResponsivePicture } from '@src/client/Components/PageElements/Picture';
-import { FadeTransitionContainer } from '@src/client/Components/PageElements/TransitionContainer';
+import { DataPrivacyContent } from './../../shared/data/data-privacy.js';
+import { PageElementLoader } from './../Components/Loaders/PageElement';
+import { ResponsivePicture } from './../Components/PageElements/Picture';
+import { FadeTransitionContainer } from './../Components/PageElements/TransitionContainer';
 
 export interface DocumentViewState {
 	request_pending: boolean;

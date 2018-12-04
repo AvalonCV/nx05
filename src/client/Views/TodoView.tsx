@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Helmet } from 'react-helmet';
-import { Todo } from '@src/client/Components/Todo/Todo';
+import { Todo } from './../Components/Todo/Todo';
 
 export interface TodoViewState {}
 export interface TodoViewProps {}

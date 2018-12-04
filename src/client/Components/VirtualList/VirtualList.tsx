@@ -15,9 +15,9 @@ import * as React from 'react';
 import { connect, FelaWithStylesProps } from 'react-fela';
 import { VirtualListStyles, virtual_list_styles } from './VirtualListStyles';
 
-import { throttleByRequestAnimationFrame } from '@src/shared/utils/throttle';
+import { throttleByRequestAnimationFrame } from './../../../shared/utils/throttle';
 import { debounce } from 'lodash';
-import browser_has_passive_events from '@src/shared/utils/hasPassiveEvents';
+import browser_has_passive_events from './../../../shared/utils/hasPassiveEvents';
 
 interface VirtualListState {
 	first_item_index: number;

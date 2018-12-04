@@ -2,16 +2,19 @@ import * as React from 'react';
 
 import ReactPlayer from 'react-player';
 // tslint:disable-next-line:no-var-requires
-const background_video = require('@src/shared/videos/Northernlights2_HD.out2.mp4');
-import background_video_poster from '@src/shared/videos/Northernlights2_HD.out2.poster.jpg';
+const background_video = require('./../../shared/videos/Northernlights2_HD.out2.mp4');
+import background_video_poster from './../../shared/videos/Northernlights2_HD.out2.poster.jpg';
 
 import { connect, FelaWithStylesProps } from 'react-fela';
 import { BackgroundVideoStyles } from './BackgroundVideoStyles';
 
-import { connectWithRedux } from '@src/client/HOC/connectWithRedux';
+import { connectWithRedux } from './../../client/HOC/connectWithRedux';
 
 // tslint:disable-next-line:max-line-length
-import { ExecutableBackgroundContainerActions, BackgroundContainerState } from '@src/shared/state/background_container';
+import {
+	ExecutableBackgroundContainerActions,
+	BackgroundContainerState
+} from './../../shared/state/background_container';
 
 export interface BackgroundVideoState {}
 export interface BackgroundVideoProps {}

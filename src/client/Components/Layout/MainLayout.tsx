@@ -7,10 +7,10 @@ import * as React from 'react';
 import { connect, FelaWithStylesProps } from 'react-fela';
 import { Link } from 'react-router-dom';
 
-import { MainLayoutStyles, main_layout_styles } from '@src/client/Components/Layout/MainLayoutStyles';
-import { FelaStylesForUnconnectedProps } from '@src/shared/css/FelaStyles';
+import { MainLayoutStyles, main_layout_styles } from './MainLayoutStyles';
+import { FelaStylesForUnconnectedProps } from './../../../shared/css/FelaStyles';
 
-import HeaderLogo from '@src/shared/images/Puma_Cat_black.svg';
+import HeaderLogo from './../../../shared/images/Puma_Cat_black.svg';
 
 interface LayoutProps {
 	children: JSX.Element | JSX.Element[];

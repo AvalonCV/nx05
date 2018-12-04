@@ -3,12 +3,12 @@ import { Route, Link, Redirect, Switch } from 'react-router-dom';
 import { Location } from 'history';
 import Helmet from 'react-helmet';
 
-import { MainLayout } from '@src/client/Components/Layout/MainLayout';
+import { MainLayout } from './../Components/Layout/MainLayout';
 // import View-Components
-import { Login } from '@src/client/Components/Login/Login';
-import { TodoView } from '@src/client/Views/TodoView';
-import { DocumentView } from '@src/client/Views/DocumentView';
-import { FadePageTransitionContainer } from '@src/client/Components/PageElements/TransitionContainer';
+import { Login } from './../Components/Login/Login';
+import { TodoView } from './../Views/TodoView';
+import { DocumentView } from './../Views/DocumentView';
+import { FadePageTransitionContainer } from './../Components/PageElements/TransitionContainer';
 
 // put them in a separate file
 const Home: React.StatelessComponent<{}> = props => {

@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 
 // custom actions
 // tslint:disable-next-line:max-line-length
-import { getExecutableSessionActions, SessionState } from '@src/shared/state/session';
+import { getExecutableSessionActions, SessionState } from './../../shared/state/session';
 // tslint:disable-next-line:max-line-length
 import {
 	getExecutableBackgroundContainerActions,
 	BackgroundContainerState
-} from '@src/shared/state/background_container';
+} from './../../shared/state/background_container';
 import { Action } from 'redux';
 
 // These props will be subtracted from original component type

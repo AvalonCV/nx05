@@ -4,16 +4,16 @@ import { Link } from 'react-router-dom';
 import { connect, FelaWithStylesProps } from 'react-fela';
 import { LoginStyles, login_styles } from './LoginStyles';
 
-import { connectWithRedux } from '@src/client/HOC/connectWithRedux';
-import { ExecutableSessionActions } from '@src/shared/state/session';
+import { connectWithRedux } from './../../../client/HOC/connectWithRedux';
+import { ExecutableSessionActions } from './../../../shared/state/session';
 
 import { Formik, FormikProps, Form, Field, FieldProps, FormikActions } from 'formik';
 
-import { VirtualList } from '@src/client/Components/VirtualList/VirtualList';
+import { VirtualList } from './../../../client/Components/VirtualList/VirtualList';
 
-import logo from '@src/shared/images/Puma_Cat.svg';
-import logoGooglePlay from '@src/shared/images/Get_it_on_Google_play.svg';
-import logoAppleAppStore from '@src/shared/images/Download_on_the_App_Store_Badge.svg';
+import logo from './../../../shared/images/Puma_Cat.svg';
+import logoGooglePlay from './../../../shared/images/Get_it_on_Google_play.svg';
+import logoAppleAppStore from './../../../shared/images/Download_on_the_App_Store_Badge.svg';
 
 export interface LoginState {}
 export interface LoginProps {}

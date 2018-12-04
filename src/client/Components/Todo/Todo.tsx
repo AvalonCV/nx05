@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect, FelaWithStylesProps } from 'react-fela';
 import { Link } from 'react-router-dom';
 
-import { TodoStyles, todo_styles } from '@src/client/Components/Todo/TodoStyles';
+import { TodoStyles, todo_styles } from './TodoStyles';
 
 export interface TodoState {}
 export interface TodoProps {}

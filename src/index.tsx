@@ -4,8 +4,8 @@ import * as ReactDOM from 'react-dom';
 import './shared/css/normalize.8.0.0.css';
 import './shared/css/core.css';
 import 'tslib';
-import { SessionSaga, SessionReducer } from '@src/shared/state/session';
-import { BackgroundContainerSaga, BackgroundContainerReducer } from '@src/shared/state/background_container';
+import { SessionSaga, SessionReducer } from './shared/state/session';
+import { BackgroundContainerSaga, BackgroundContainerReducer } from './shared/state/background_container';
 
 // ---------------------- DYNAMIC CSS ----------------------
 import { createRenderer } from 'fela';
@@ -36,7 +36,7 @@ const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSaga);
 
 // ---------------------- OUR OWN APPLICATION ----------------------
-import App from '@src/App';
+import App from './App';
 
 // ----------------- add static files to fela -----------------
 // renderer.renderStatic(normalizeCSS.toString().replace(/\*.+?\*/g, ''));

@@ -5,10 +5,10 @@ import { Location } from 'history';
 import debounce from 'lodash/debounce';
 import { removeClass, addClass } from 'dom-helpers/class';
 
-import { AppStyles, app_styles } from '@src/AppStyles';
+import { AppStyles, app_styles } from './AppStyles';
 
-import { ViewRoutes as MainApplicationRoutes } from '@src/client/Routes/ViewRoutesConfiguration';
-import { BackgroundVideoContainer } from '@src/client/Layout/BackgroundVideo';
+import { ViewRoutes as MainApplicationRoutes } from './client/Routes/ViewRoutesConfiguration';
+import { BackgroundVideoContainer } from './client/Layout/BackgroundVideo';
 
 // const article_data = require('./shared/data/article-data.json');
 // tslint:disable-next-line:max-line-length
