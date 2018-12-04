@@ -1,5 +1,5 @@
 import { Rules } from 'react-fela';
-import { FelaCSSElements } from '@src/shared/css/FelaStyles';
+import { FelaCSSElements } from './../../../shared/css/FelaStyles';
 
 export const virtual_list_styles: FelaCSSElements = {
 	list: {
